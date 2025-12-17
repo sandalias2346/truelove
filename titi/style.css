@@ -1,0 +1,185 @@
+/* style.css - Enhanced Version */
+@import url('https://fonts.googleapis.com/css2?family=Protest+Riot&display=swap');
+
+/* 1. CSS Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Protest Riot', sans-serif;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url('assets/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+/* 2. Main Dialog Box */
+.cuadro-dialogo {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px) saturate(180%); /* Enhanced effect [citation:5] */
+    -webkit-backdrop-filter: blur(15px) saturate(180%);
+    border: 2px solid rgba(255, 11, 174, 0.8);
+    border-radius: 20px;
+    padding: 2.5rem;
+    text-align: center;
+    max-width: 90vw;
+    width: 500px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    z-index: 10;
+    position: relative;
+}
+
+.cuadro-dialogo h1 {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    margin-bottom: 1rem;
+    color: #ffebf9;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.cuadro-dialogo p {
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    margin-bottom: 2rem;
+    line-height: 1.4;
+    color: #fff;
+    transition: color 0.3s ease;
+    min-height: 3rem; /* Prevents layout shift */
+}
+
+.cuadro-dialogo p:hover {
+    color: #ffb6e6;
+}
+
+/* 3. Buttons Container & Styles */
+.buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+button {
+    font-family: 'Protest Riot', sans-serif;
+    font-size: clamp(1.2rem, 3vw, 1.7rem);
+    padding: 0.8em 2em;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    min-width: 140px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+    outline: none;
+    z-index: 1;
+}
+
+button::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+    z-index: -2;
+}
+button::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.2);
+    transition: all 0.3s;
+    border-radius: 50px;
+    z-index: -1;
+}
+button:hover::before {
+    width: 100%;
+}
+
+#btnSi {
+    background-color: #4CAF50;
+    color: white;
+    box-shadow: 0 6px 0 #2E7D32;
+}
+#btnSi:hover, #btnSi:focus {
+    background-color: #66BB6A;
+    transform: translateY(-3px);
+    box-shadow: 0 9px 0 #2E7D32;
+}
+#btnSi:active {
+    transform: translateY(1px);
+    box-shadow: 0 3px 0 #2E7D32;
+}
+
+#btnNo {
+    background-color: #F44336;
+    color: white;
+    box-shadow: 0 6px 0 #C62828;
+    /* will-change improves performance for animated transform [citation:8][citation:9] */
+    will-change: transform;
+}
+#btnNo:hover, #btnNo:focus {
+    background-color: #EF5350;
+    box-shadow: 0 9px 0 #C62828;
+}
+#btnNo:active {
+    transform: translateY(1px) scale(0.98) !important; /* Overrides dynamic translate */
+    box-shadow: 0 3px 0 #C62828 !important;
+}
+
+/* 4. Canvas for Heart Animation */
+canvas#heart {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Clicks pass through to elements below */
+    z-index: 1;
+}
+
+/* 5. Responsive Adjustments */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    .cuadro-dialogo {
+        padding: 1.8rem;
+        border-width: 1.5px;
+    }
+    .buttons {
+        gap: 15px;
+    }
+    button {
+        min-width: 120px;
+        padding: 0.7em 1.5em;
+    }
+}
+
+@media (max-width: 480px) {
+    .cuadro-dialogo {
+        padding: 1.5rem;
+    }
+    .buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    button {
+        width: 100%;
+        max-width: 250px;
+    }
+}
